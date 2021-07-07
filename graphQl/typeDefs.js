@@ -20,7 +20,7 @@ module.exports = gql`
       name: String!
       linenumber: Int!
       pixelnumber: Int!
-      pixels: [Pixel]!
+      pixels: String!
   }
 
 `;

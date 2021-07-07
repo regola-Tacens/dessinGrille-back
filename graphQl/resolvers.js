@@ -1,4 +1,5 @@
-const { User } = require('../models')
+const { User } = require('../models');
+const {Artworks} = require('../models');
 
 module.exports = {
     Query: {
@@ -10,33 +11,14 @@ module.exports = {
             console.log(error)
         }
       },
-      getArtworks: () => {
-          const artworks=[
-              {
-                  name: 'pixel mushroom',
-                  linenumber: 4,
-                  pixelnumber:2,
-                  pixels: [
-                      {
-                          index :0, 
-                          color : 'white'
-                      },
-                      {
-                          index :1, 
-                          color : 'red'
-                      },
-                      {
-                          index :2, 
-                          color : 'white'
-                      },
-                      {
-                          index :3, 
-                          color : 'white'
-                      },
-                  ]
-              }
-          ]
-          return artworks
+      getArtworks: async() => {
+          try {
+              const artworked = await Artworks.findAll()
+               return artworked
+          } catch (error){
+             console.log(error)
+          }
+          
       }
     },
   
