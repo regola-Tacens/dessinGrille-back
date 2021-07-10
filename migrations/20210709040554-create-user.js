@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -32,3 +36,5 @@ module.exports = {
     await queryInterface.dropTable('users');
   }
 };
+
+// sequelize db:migrate:undo 20210705020002-create-user

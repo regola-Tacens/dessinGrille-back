@@ -5,10 +5,16 @@ module.exports = gql`
     getUsers: [User]!, 
     getArtworks: [Artworks]!
   }
+
+  type Mutation {
+    register(username: String! email: String! password: String! confirmPassword: String!): User!
+    saveArtwork(author:String! name: String! linenumber: Int! pixelnumber: Int! pixels: String!): Artworks!
+  }
   
   type User {
       username: String!
       email: String!
+      password: String!
   }
 
   type Pixel {
@@ -24,3 +30,6 @@ module.exports = gql`
   }
 
 `;
+
+
+
