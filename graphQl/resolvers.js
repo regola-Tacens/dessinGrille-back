@@ -77,36 +77,50 @@ module.exports = {
           throw error
         }
       },
+      getArtworks: async() => {
+        try {
 
-      getArtworks: async(parent,args,context) => {
-          try {
+        
+        const artworked = await Artworks.findAll()
+        return artworked
 
-          let user;
+        } catch (error){
+           console.log(error)
+           throw error
+        }
+        
+    }
+  },
+
+    //   getArtworks: async(parent,args,context) => {
+    //       try {
+
+    //       let user;
           
-          if(context.req && context.req.headers.authorization){
+    //       if(context.req && context.req.headers.authorization){
             
-            const token = context.req.headers.authorization.split('Bearer ')[1]
-            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
-              if(err) {
-                throw new AuthenticationError('non authentifié')
-              }
-              user = decodedToken;
+    //         const token = context.req.headers.authorization.split('Bearer ')[1]
+    //         jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+    //           if(err) {
+    //             throw new AuthenticationError('non authentifié')
+    //           }
+    //           user = decodedToken;
 
-            })
-          }
+    //         })
+    //       }
           
-          const artworked = await Artworks.findAll({
-            where:{ author :{ [Op.eq] : user.username}}
-          })
-          return artworked
+    //       const artworked = await Artworks.findAll({
+    //         where:{ author :{ [Op.eq] : user.username}}
+    //       })
+    //       return artworked
 
-          } catch (error){
-             console.log(error)
-             throw error
-          }
+    //       } catch (error){
+    //          console.log(error)
+    //          throw error
+    //       }
           
-      }
-    },
+    //   }
+    // },
     Mutation: {
 
       saveArtwork: async(parent, args, context, info) => {
