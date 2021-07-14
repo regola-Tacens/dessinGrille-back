@@ -1,25 +1,108 @@
 const { User } = require('../models');
+const {JWT_SECRET} = require('../config/env.json')
 const {Artworks} = require('../models');
 const bcrypt = require('bcryptjs')
-const { UserInputError } = require('apollo-server');
+const { UserInputError, AuthenticationError } = require('apollo-server');
 const artworks = require('../models/artworks');
+const jwt = require('jsonwebtoken');
+const { Op } = require ('sequelize');
 
 module.exports = {
     Query: {
-      getUsers: async () => {    
-        try {
-            const users = await User.findAll()
+      getUsers: async (parent,args,context) => { 
+       
+        try {  
+          let user;
+          if(context.req && context.req.headers.authorization){
+            const token = context.req.headers.authorization.split('Bearer ')[1]
+            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+              if(err) {
+                throw new AuthenticationError('non authentifié')
+              }
+              user = decodedToken;
+            })
+          }
+            const users = await User.findAll({
+              where :{ username :{ [Op.ne] : user.username} }
+            })
             return users
         } catch (error) {
             console.log(error)
+            throw error
         }
       },
-      getArtworks: async() => {
+
+      login: async(parent, args) => {
+        const { username, password } = args;
+        let errors ={}
+
+        try {
+          // on verifie que les champs username et password en sont pas vides
+          if (username.trim() === '') errors.username ='vous avez oublié de saisir le nom de l\'utilisateur'
+          if (password === '') errors.password ='vous avez oublié de saisir le nom de passe'          
+          if(Object.keys(errors).length > 0){
+            throw new UserInputError('le champ est vide', { errors })
+          }
+          // on cherche dans la liste des emails si il existe un email qui corresponds.
+          const user = await User.findOne({where : {username :username}});
+
+          if(!user) {
+            errors.email = ' cet utilisateur n\'existe pas';
+            throw new UserInputError('l\' utilisateur n\'existe pas', { errors })
+          }
+
+
+          // on compare le mote de passe saisi au mot de passe enregistré.
+          const correctPassword = await bcrypt.compare(password, user.password)
+          if(!correctPassword) {
+            errors.password = 'le mot de passe est faux';
+            throw new AuthenticationError('mauvais mot de passe', { errors })
+          }
+
+          const token = jwt.sign(
+            { username }
+            ,JWT_SECRET,
+            { expiresIn: 60 * 60});
+
+            // user.token = token;
+
+          return {
+            ...user.toJSON(),
+            createdAt: user.createdAt.toISOString(),
+            token
+          }
+
+        } catch (error) {
+          console.log(error)
+          throw error
+        }
+      },
+
+      getArtworks: async(parent,args,context) => {
           try {
-              const artworked = await Artworks.findAll()
-               return artworked
+
+          let user;
+          
+          if(context.req && context.req.headers.authorization){
+            
+            const token = context.req.headers.authorization.split('Bearer ')[1]
+            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+              if(err) {
+                throw new AuthenticationError('non authentifié')
+              }
+              user = decodedToken;
+
+            })
+          }
+          
+          const artworked = await Artworks.findAll({
+            where:{ author :{ [Op.eq] : user.username}}
+          })
+          return artworked
+
           } catch (error){
              console.log(error)
+             throw error
           }
           
       }
@@ -42,6 +125,38 @@ module.exports = {
             throw error
           }
           
+      },
+      deleteArtwork: async(parent,args,context,info) => {
+        let { name }  = args
+        let errors = {}
+        try {
+          let user;
+          if(context.req && context.req.headers.authorization){
+            const token = context.req.headers.authorization.split('Bearer ')[1]
+            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+              if(err) {
+                throw new AuthenticationError('non authentifié')
+              }
+              user = decodedToken;
+            })
+          }
+
+          //check if artwork exists
+          const selectedArtwork = await Artworks.findOne({ where: {name : name} })
+          if(!selectedArtwork){
+            throw new UserInputError('Ce nom de dessin n\'existe pas', { errors })
+          } 
+            
+          await Artworks.destroy({
+            where :{ name :{ [Op.eq] : name} }
+          })
+          
+
+        }catch (error) {
+          console.log(error);
+          throw error;
+        }
+
       },
       register: async (parent, args, context, info)=> {
         let { username,email,password,confirmPassword } = args

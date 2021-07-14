@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+        "node":true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"]
+    },
+    "globals": {
+        "require": true,
+        "process": true,
+        "module":true
+    }
+}
