@@ -201,13 +201,25 @@ module.exports = {
           // TODO : hash password
           password = await bcrypt.hash(password, 6);
 
+          // !!!!!!!!!!!!!!!CREATE A TOKEN, A CHANGER PEUT ETRE VOIR LE TUTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          const token = jwt.sign(
+            { username }
+            ,JWT_SECRET,
+            { expiresIn: 60 * 60});
+
+
           // TODO : Create user
          const user =  await User.create({
             username, email, password
           })
 
           // TODO : Return user to Client
-          return user
+          return {
+            ...user.toJSON(),
+            createdAt: user.createdAt.toISOString(),
+            token
+          }
+          // return user
 
         } catch(error) {
            console.log(error)
