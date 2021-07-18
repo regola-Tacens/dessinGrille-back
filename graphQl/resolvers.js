@@ -180,9 +180,9 @@ module.exports = {
 
           // TODO : Validate input data
           if(email.trim() === '') errors.email = 'L\'email ne doit pas être vide';
-          if(username.trim() === '') errors.username = 'Le champ user name ne doit pas être vide';
-          if(password.trim() === '') errors.password = 'Le champ mot de passe ne doit pas être vide';
-          if(confirmPassword.trim() === '') errors.confirmPassword = 'Le champ confirmer mot de passe ne doit pas être vide';
+          if(username.trim() === '') errors.username = 'Il faut mettre un nom';
+          if(password.trim() === '') errors.password = 'Il faut mettre un mot de passe';
+          if(confirmPassword.trim() === '') errors.confirmPassword = 'Confirmez le mot de passe';
 
           // TODO : check if usernam / email exists
           const userByUsername = await User.findOne({ where: {username : username} })
