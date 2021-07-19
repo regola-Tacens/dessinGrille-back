@@ -1,9 +1,9 @@
 const { ApolloServer } = require('apollo-server');
 
-const { sequelize } = require('./models')
+const { sequelize } = require('./models');
 
 
-const typeDefs = require ('./graphQl/typeDefs')
+const typeDefs = require ('./graphQl/typeDefs');
 const resolvers = require ('./graphQl/resolvers');
 
 const server = new ApolloServer({
