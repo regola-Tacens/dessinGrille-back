@@ -1,7 +1,5 @@
 const { ApolloServer } = require('apollo-server');
-
 const { sequelize } = require('./models');
-
 
 const typeDefs = require ('./graphQl/typeDefs');
 const resolvers = require ('./graphQl/resolvers');
@@ -18,5 +16,5 @@ server.listen().then(({ url }) => {
     sequelize
         .authenticate()
         .then(()=> console.log('database connceted!'))
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
 });
