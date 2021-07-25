@@ -76,12 +76,14 @@ module.exports = {
         }
       },
        getArtworks: async(parent,args,context) => {
+         let errors={};
           try {
           let user;
           if(context.req && context.req.headers.authorization){   
             const token = context.req.headers.authorization.split('Bearer ')[1]
             jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
               if(err) {
+                errors.auth='unauthentified';
                 throw new AuthenticationError('non authentifié')
               }
               user = decodedToken;
@@ -104,6 +106,17 @@ module.exports = {
           let { author, name, linenumber, pixelnumber, pixels} = args
 
           try {
+            let user;
+            if(context.req && context.req.headers.authorization){
+              const token = context.req.headers.authorization.split('Bearer ')[1]
+              jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+                if(err) {
+                  // errors.auth="noAuth";
+                  throw new AuthenticationError('non authentifié')
+                }
+                user = decodedToken;
+              })
+            }
 
             // TODO : create artwork
              const artwork = await Artworks.create({
@@ -125,6 +138,7 @@ module.exports = {
             const token = context.req.headers.authorization.split('Bearer ')[1]
             jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
               if(err) {
+                // errors.auth="noAuth";
                 throw new AuthenticationError('non authentifié')
               }
               user = decodedToken;
