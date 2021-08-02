@@ -163,7 +163,8 @@ module.exports = {
       },
       updateArtwork: async (parent,args,context,info) =>{
         let { author, name, linenumber, pixelnumber, pixels} = args
-
+        console.log('author', author)
+        console.log('name', name)
         try {
           let user;
           if(context.req && context.req.headers.authorization){
@@ -177,7 +178,7 @@ module.exports = {
             })
           }
           //upatde artwork
-          const artworkToPatch = await Artworks.findOne({Where :{author: author, name : name}})
+          const artworkToPatch = await Artworks.findOne({where :{author: author, name : name}})
           artworkToPatch.linenumber = linenumber;
           artworkToPatch.pixelnumber = pixelnumber;
           artworkToPatch.pixels = pixels;
