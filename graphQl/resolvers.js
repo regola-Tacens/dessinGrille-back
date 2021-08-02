@@ -161,6 +161,35 @@ module.exports = {
         }
 
       },
+      updateArtwork: async (parent,args,context,info) =>{
+        let { author, name, linenumber, pixelnumber, pixels} = args
+
+        try {
+          let user;
+          if(context.req && context.req.headers.authorization){
+            const token = context.req.headers.authorization.split('Bearer ')[1]
+            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+              if(err) {
+                // errors.auth="noAuth";
+                throw new AuthenticationError('non authentifié')
+              }
+              user = decodedToken;
+            })
+          }
+          //upatde artwork
+          const artworkToPatch = await Artworks.findOne({Where :{author: author, name : name}})
+          artworkToPatch.linenumber = linenumber;
+          artworkToPatch.pixelnumber = pixelnumber;
+          artworkToPatch.pixels = pixels;
+          await artworkToPatch.save()
+         return artworkToPatch
+
+      } catch (error) {
+        console.log(error)
+        throw error
+      }   
+        
+      },
       register: async (parent, args, context, info)=> {
         let { username,email,password,confirmPassword } = args
         let errors = {}
