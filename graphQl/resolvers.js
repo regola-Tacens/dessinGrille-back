@@ -163,8 +163,6 @@ module.exports = {
       },
       updateArtwork: async (parent,args,context,info) =>{
         let { author, name, linenumber, pixelnumber, pixels} = args
-        console.log('author', author)
-        console.log('name', name)
         try {
           let user;
           if(context.req && context.req.headers.authorization){
