@@ -8,7 +8,7 @@ const library ={
         logMessage : document.querySelector('.logMessage')
     },
     getArtworks: ()=> {
-        fetch('http://localhost:4000/graphql', {
+        fetch('http://54.144.218.140:4000/graphql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

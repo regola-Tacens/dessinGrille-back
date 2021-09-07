@@ -1,6 +1,6 @@
 
 const PORT = 4000;
-const HOST = 'localhost';
+const HOST = '54.144.218.140';
 
 const userLogger = {
     user :{
