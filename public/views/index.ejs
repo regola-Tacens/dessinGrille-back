@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <base href='/'> -->
+
+  <title>Invader</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <nav class="mainMenu">
+    <button class="test" onclick='location.href="library"'>your Icon library</button>
+    <button class='test' onclick='location.href="signup"'>signup</button>
+    <button class='test' onclick='location.href="login"'>login</button>
+    <button class='nav__logout'>logout</button>
+    <p class="logMessage"></p>
+  </nav>
+    <div class="canvasContainer" class='canvasContainer' width="400px" >
+      <canvas id="myCanvas" width="250" height="250" style="border:1px solid #c3c3c3;">
+    </div>
+    <a class="downloadImage">E</a>
+    <div class="container">
+        <div id="invader"></div> 
+    </div>
+    <div class="toolsRight">
+      <div  class ="color-container" ></div>
+      <form class="colorPicker">
+          <input type="color" name="colorPicker" class="colorPicked" >
+          <label for="color_name">nom de la couleur</label>
+          <input type="text"  name="color_name" class="colorName" required>
+          <button type="submit" >CREER COULEUR</button>
+      </form>
+      <form class="configuration">
+        <label for="line_number">nombre de lignes</label>
+        <input type="number" min="1" max="90"value = "10" name="line_number" placeholder="choose number of lines" required>
+        <label for="pixel_number">nombre de pixels</label>
+        <input type="number" min="1" max ="50" value = "25" name="pixel_number" placeholder="choose number of pixels" required>
+        <button type="submit">CREER GRILLE</button>
+      </form>
+      <form class="saveArtworkForm">
+        <label for="artwork_name">nom du dessin</label>
+        <input type="text"  name="artwork_name" class="colorName" required>
+        <button type="submit" >ENREGISTRER</button>
+      </form>
+      <button class="createImage" href="">TELECHARGER IMAGE</button>
+      <button class="resetGrid">EFFACER DESSIN</button>
+    </div>
+    <div class="bottomTools">
+      <input type="range" class="zoomer" id="zoomer" mni="1" max="50" step="1" value="0">
+    </div>  
+  <!-- <script src="./js/app.js"></script> -->
+  <script src="../bundle.js"></script>
+</body>
+</html>

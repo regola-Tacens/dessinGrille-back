@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <base href='/'> -->
+
+  <title>Invader</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <nav class="mainMenu">
+        <!-- <button class="test">your Icon library</button> -->
+        <button class='test' onclick='location.href="./signup.html"'>signup</button>
+        <!-- <button class='test' onclick='location.href="../index.html"'>Create Icons</button> -->
+      </nav>
+    <div class="formContainer">
+        <form class="userForm" type="submit">
+          <div class="inputContainer">
+            <label for="username">name</label>
+            <input type="text" name="username">
+            <p class="loginNameError"></p>
+          </div>
+          <div class="inputContainer">
+            <label for="password">password</label>
+            <input type="password" name="password">
+            <p class="loginPasswordError"></p>
+          </div>
+          <button type="submit" class="userLogin">login</button>
+        </form>
+    </div>
+    <script src="../login.js"></script>  
+</body>
+</html>
+

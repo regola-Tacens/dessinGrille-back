@@ -1,0 +1,45 @@
+
+:root{
+    background: linear-gradient(to right, #9058ef, #3c35b8)  ;
+    --focus-lavender  :#A07AC6;
+}
+
+.library__container{
+    
+    margin : 0 auto;
+    margin-top:10%;
+    width : 60%;
+}
+
+.library__li{
+    cursor :pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin : 0 5%;
+    /* width : 100px; */
+
+}
+.library__artworksList {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.secondaryButton{
+    /* margin-left : 10px; */
+    width : 4rem;
+    border-radius: 5px;
+    background-color: #86002d;
+}
+/* button  {
+    margin :1% 0;
+    width : 8rem;
+    padding: 0.5rem 0;
+    background-color: #353275;
+    border : none;
+    color: #D2DAE2;
+    font-size : 0.7rem;
+} */

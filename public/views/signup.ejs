@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <base href='/'> -->
+
+  <title>Invader</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <nav class="mainMenu">
+        <button class='test' onclick='location.href="login"'>login</button>
+      </nav>
+    <div class="formContainer">
+        <form class="userForm">
+          <div class="inputContainer">
+            <label for="username">name</label>
+            <input type="text" name="username" required>
+            <p class="usernameError"></p>
+          </div>
+          <div class="inputContainer">
+            <label for="email">email</label>
+            <input type="email" name="email" required >
+            <p class="emailError"></p>
+          </div>
+          <div class="inputContainer">
+            <label for="password">password</label>
+            <input type="password" name="password" required autocomplete="on">
+            <p class="passwordError"></p>
+          </div>
+          <div class="inputContainer">
+            <label for="confirmPassword">confirm password</label>
+            <input type="password" name="confirmPassword" required autocomplete="on">
+            <p class="confirmPasswordError"></p>
+          </div>
+          <button type="submit" class="userSubmit">sign up</button>
+
+        </form>
+    </div>
+    <script src="../register.js"></script>
+
+    
+</body>
+</html>
+

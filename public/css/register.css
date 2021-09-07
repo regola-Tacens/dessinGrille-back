@@ -1,0 +1,6 @@
+.usernameError, .emailError, .passwordError, .confirmPasswordError{
+    color : rgb(45, 236, 38);
+    margin-top: 1%;
+    margin-bottom: 7%;
+    text-align: left;
+}
