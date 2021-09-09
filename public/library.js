@@ -1,3 +1,5 @@
+const PORT = 80;
+const HOST = '54.144.218.140';
 
 const library ={
     state : {
@@ -8,7 +10,7 @@ const library ={
         logMessage : document.querySelector('.logMessage')
     },
     getArtworks: ()=> {
-        fetch('http://54.144.218.140:4000/graphql', {
+        fetch(`http://${HOST}:${PORT}/graphql`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ const library ={
         } 
     },
     deleteArtwork: (name)=>{
-        fetch('http://localhost:4000/graphql', {
+        fetch(`http://${HOST}:${PORT}/graphql`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

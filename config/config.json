@@ -1,22 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "pixelcreator",
+    "password": "pixelcreator",
+    "database": "pixelcreator",
+    "host": "127.0.0.1",
+    "port":3306,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "pixelcreator",
+    "password": "pixelcreator",
     "database": "pixelcreator",
     "host": "54.144.218.140",
     "dialect": "mysql"
   },
-  "test": {
-    "username": "root",
-    "password": "",
-    "database": "database_test",
-    "host": "54.144.218.140",
-    "dialect": "mysql"
-  },
   "production": {
-    "username": "root",
-    "password": "",
-    "database": "database_production",
+    "username": "pixelcreator",
+    "password": "pixelcreator",
+    "database": "pixelcreator",
     "host": "54.144.218.140",
     "dialect": "mysql"
   }

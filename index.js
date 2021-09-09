@@ -7,7 +7,6 @@ const { sequelize } = require('./models');
 const express = require('express');
 // const http =require('http');
 
-
 const typeDefs = require ('./graphQl/typeDefs');
 const resolvers = require ('./graphQl/resolvers');
 
@@ -28,48 +27,11 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-
-app.listen({ port: 4000 }, () =>{
-    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+app.listen(4000, () =>{
+    console.log(`connected ${server.graphqlPath}`);
     sequelize
         .authenticate()
         .then(()=> console.log('database connceted!'))
         .catch((err) => console.log(err));
 }
 );
-
-// app.listen().then(({ url }) => {
-//     console.log(`🚀 Server ready at ${url}`);
-
-//     sequelize
-//         .authenticate()
-//         .then(()=> console.log('database connceted!'))
-//         .catch((err) => console.log(err));
-// });
-
-///////////////////////////////
-// const express = require('express');
-// const { ApolloServer, gql } = require('apollo-server-express');
-
-// // Construct a schema, using GraphQL schema language
-// const typeDefs = gql`
-//   type Query {
-//     hello: String
-//   }
-// `;
-
-// // Provide resolver functions for your schema fields
-// const resolvers = {
-//   Query: {
-//     hello: () => 'Hello world!',
-//   },
-// };
-
-// const server = new ApolloServer({ typeDefs, resolvers });
-
-// const app = express();
-// server.applyMiddleware({ app });
-
-// app.listen({ port: 4000 }, () =>
-//   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-// );

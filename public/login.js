@@ -1,5 +1,4 @@
-
-const PORT = 4000;
+const PORT = 80;
 const HOST = '54.144.218.140';
 
 const userLogger = {
